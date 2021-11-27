@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<body ng-app="">
+  <div ng-init="msg='hello angularjs'">
+    <input type="text" placeholder="请输入内容" ng-model="msg">
+    <h6>您输入的内容是:<br>{{msg}}</h6>
+    内容:<span ng-bind="msg"></span>
+  </div>
+<script src="../angularjs/angular.mini.js"></script>
+<script>
+      /*
+        1.AngularS框架
+        描述:AngularJS框架诞生于2009年,由google公司提出
+        特点:AngularJS的核心特点是Mw的设计模式，支持模块化和双向数据绑定以及依赖注入。
+         由来: AngularJS框架时为了克服html语言在构建App上天生的不足而设计的
+         2.AngularS整体感知
+        描述:AngularJs框架的内容非常庞大，涉及到wEB应用架构的各个方面
+         我们在这里学习AngularJS的1.0版本目的主要是为了改变我们的思想例子:
+         快速实现mvc设计模式(数据模块与页面与用户之间的沟通)
+
+        3.边界指令ng-app
+        描述:Angular JS框架在使用的时候除了需要引入框架文件之外，还需要为框架指明一个边界
+        告知框架在哪个范围内生效。如果不使用边界指令进行声明，则AngularJS框架引入失习惯上写在html标签之内，
+        表示在当前页面中angularJS都能正常使用
+        语法:<html ng-app></html>
+        注意:边界指令是使用NG框架必须使用的一个指令，不写一定使用错识
+        4.呈现指令{{}}
+        描述:NG框架规定{{}}嵌套双花括号用来表示【内容呈现】功能在{{}}中可以书写NG语法规则下的变量、字符串甚至表达式
+        说明:在上节课例子中{{msg}},就是使用了呈现指令,将NG变量msg中的内容呈现出来
+        强调:呈现指令内只能书写合乎NG语法规则的内容,任何不符合的输入都不能保证最终的呈现结果这种写法
+        坚决禁止:{{var num=1}};
+        5.信息指令ng-model
+        描述:NG框架规定ng-model用来对input或textarea这类
+        用于收集用户信息的标签进行数据绑定ng-model所赋的值,即为【保存有用户输入内容的NG变量】
+        语法:<textarea ... ng-model='userInfo'></textarea>
+        6.绑定指令ng-bind
+        描述:NG框架中提供了一个用于对非输入性的标签使用的
+        类似于{{}}呈现指令的辅助指令即为ng-bind
+        作用是能够将NG变量绑定到想要显示的标签之上,
+        并且在NG框架加载失败的时候，也不会直接将语法错误暴露出来
+        语法:<span ng-bind='message'><span>
+        5,初始化指令ng-init
+        描述:NG框架中规定使用本指令来对边界内部的数据模型(IG变量们)进行初始化操作
+        ng-init并没有规定具体的必须摆放位置,但习惯上放在body 上会在页面加载后,
+        自动对内部规定的教据模型进行初始化操作
+        语法: <bddy ng-init='message="hel1o AngularJS"'></body>
+        */
+</script>
+</body>
+</html>

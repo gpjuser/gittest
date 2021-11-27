@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app' ng-controller='mainController'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title ng-bind="pageTitle"></title>
+    <script src="../angularjs/angular.mini.js"></script>
+</head>
+<body>
+    <div>
+        <span ng-bind="msg"></span>
+        <ul>
+            <!--ng-repeat类似于for in遍历数组 -->
+            <!-- track by $index 表示不介意有重复元素 -->
+            <li ng-repeat='item in names track by $index'>{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        //页面数据模型
+        var app=angular.module('app',[])
+        //实现html标签的控制器
+        app.controller('mainController',['$scope',function($scope){
+            $scope.pageTitle='lesson3控制器';
+            $scope.msg='今天是一个好日子';
+            $scope.names=['xiaoming','xiaohong','xiaolan','xiaoli','xiaoli']
+        }])
+        /*
+        1.angular.module()方法
+        描述:本方法是NG框架中提供，用来生成【页面数据模型】的方法
+        语法:var模型名称= angular.module('边界名称’，[注入信息])
+        说明:因为现在还没有涉及到注入内容,因此暂时空置即可
+        例子:var myApp_module = angular.module('app',[]);
+        2.声明控制器指令ng-controller
+        描述:本指令用来在页面中声明哪一个元素为控制器
+        控制器就是用来操作数据和视图的部件。
+        语法:<html ng-controller='mainController' >...</html>
+        注意:只要声明一个标签拥有控制器，这个控制器在脚本中就必须写出!!
+        3.实现控制器方法*.controller
+        描述:本方法是NG框架在script脚本中提供，用来生成【页面控制器】的方法
+        语法:页面数据模型名称.controller ('控制器名称'，['$scope', function ($scope){...]]);
+        例子:app.controller ( 'mainController', [ '$scope', function ($scope){...}]);
+        4.遍历指令ng-repeat
+        描述:本指令用来遍历NG变量，并根据其进行构建页面html元素
+        语法:<E ng-repeat='任意变量名in NG变量 track by $index'>{{[任意变量名}}/E>
+        说明:track by $index表示允许有重复内容存在，如果不写出现重复内容会报错
+        例子:<li ng-repeat='pname in names track by $index '>{(pname}}/li>
+        补充:ng-repeat指必须在controller中对NG变量赋值之后才会生效
+          单独的ng-repeat毫无用处,因为NG变量不存在,没法赋值。
+
+        */
+    </script>
+</body>
+</html>

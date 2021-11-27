@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller='mainController'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title ng-bind='mainTitle'></title>
+    <script src="../angularjs/angular.mini.js"></script>
+</head>
+<body>
+    <button ng-click="handleClick()">change</button>
+    <ul>
+        <li ng-repeat="item in li_infos track by $index" ng-click="liClick($index)">{{item}}</li>
+    </ul>
+    <p ng-show='isShow'>angular学习</p>
+    <script>
+        //页面数据模型
+        var app=angular.module('app',[])
+        //实现html标签的控制器
+        app.controller('mainController',['$scope',function($scope){
+           $scope.mainTitle="lesson4事件监听";
+           $scope.handleClick=function(){
+               console.log('我改变了button中内容');
+               $scope.isShow=!$scope.isShow
+           };
+           $scope.isShow=true
+           $scope.li_infos=['999感冒灵','胃肠宁片','沉香化气片'];
+           $scope.liClick=(index)=>{
+                console.log('我点击了:'+$scope.li_infos[index]);
+           }
+        }])
+        /*
+        1.事件监听
+        描述:NG框架中通过对元素标签添加【ng-事件名】指令，来对元素添加事件监听
+        而事件监听的回调函数需要在controller中，通过$scope来实现
+        tips:整个过程类似html事件
+        语法:<E ng-事件名称='回调函数名(NG变量)'></E>
+             $scope.回调函教名= function(形参){
+             //在函数中形参就是传入的NG变量的值};
+             --
+        */
+    </script>
+</body>
+</html>
