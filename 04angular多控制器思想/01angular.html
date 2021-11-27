@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lesson5 angularJs评论案例</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <br /><br /><br />
+    <div class="container" ng-controller="commentController">
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <!-- 评论模块 -->
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="msg" />
+            <span class="input-group-btn">
+              <button class="btn btn-primary" ng-click="submitComment(msg)">
+                评论
+              </button>
+            </span>
+          </div>
+          <!-- 评论内容 -->
+          <ul class="list-group">
+            <li
+              class="list-group-item"
+              ng-repeat="item in commentArr track by $index"
+            >
+              <span>{{item}}</span>
+              <a
+                href="javascript:;"
+                class="btn btn-danger"
+                ng-click="deletComment($index)"
+                >删除本条评论</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul ng-controller="nameController">
+      <li ng-repeat="liInfo in liInfoList track by $index">{{liInfo}}</li>
+    </ul>
+    <script src="../angularjs/angular.mini.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous">
+    </script>
+    <script src="../controllerjs/app.js"></script>
+    <script src="../controllerjs/mainController.js"></script>
+    <script src="../controllerjs/commentController.js"></script>
+    <script src="../controllerjs/nameController.js"></script>
+    <script>
+      /*
+        1.ng-controller与多控制器思想
+         描述:能够看到angular的操作，实际上脚本代码都是写在controller之中的。
+         而刚刚我们将所有的脚本都堆积到一个控制器中的操作
+         虽然理解上变得容易，但是实际开发过程中则会造成灾难
+         所以为了便于团队开发，为了便于维护
+         NG提出了【多控制器思想】
+         说明:
+          (1)多控制器思想:
+          类似于div中的布局思想，是将控制器按照页面的不同模块功能进行切分
+          一个控制器只用来控制一个功能模块，多个控制器之间互不影响，独立工作。
+          (2)优势:
+          分工明确,代码清晰,便于维护当系统出现问题,能够立即定位到问题坐标
+          (3）弊端:
+          对于初学者而言，前期代码的架构会变得特繁琐，对初学者不是很友好。
+          强调:
+          (1)每一个控制器只要被声明,就必须通过.controller实现即便控制器中没有代码,也必须写出。
+          (2)每一个控制器作用域可以认为是嵌套的，即外层controller可以直接访问到内层controller
+          内的NG变量而同级controller之间互不影响
+          (3)对于程序，习惯上mainController作为用户默认加载页面的根控制器有且仅有唯一一个
+        */
+    </script>
+  </body>
+</html>

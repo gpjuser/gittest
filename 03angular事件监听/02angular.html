@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app' ng-controller='mainController'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson5 angularJs评论案例</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+                <!-- 评论模块 -->
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="msg">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" ng-click=submitComment(msg)>评论</button>
+                    </span>
+                </div>
+                <!-- 评论内容 -->
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="item in commentArr track by $index">
+                        <span>{{item}}</span>
+                        <a href="javascript:;" class="btn btn-danger" ng-click="deletComment($index)">删除本条评论</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="../angularjs/angular.mini.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script>
+        var app=angular.module('app',[])
+        //实现html标签的控制器
+        app.controller('mainController',['$scope',function($scope){
+           $scope.commentArr=[];
+           $scope.submitComment=function(msg){
+               $scope.commentArr.push(msg)
+               $scope.msg=''
+           };
+           $scope.deletComment=function(index){
+               $scope.commentArr.splice(index,1) //参数1指定索引，参数2删除个数
+           }
+        }])
+    </script>
+</body>
+</html>
