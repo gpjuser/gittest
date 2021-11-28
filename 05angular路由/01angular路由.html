@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title ng-bind="mainTitle"></title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#showname">姓名列表显示</a></li>
+      <li><a href="#showinfo">信息列表显示</a></li>
+    </ul>
+    <div style="width: 300px; height: 300px; border: 1px solid black;" ng-view></div>
+    <script src="../angularjs/angular.mini.js"></script>
+    <script src="../angular-route/angular-route.min.js"></script>
+    <script>
+      /*
+        1.router路由
+       描述:router路由是angularJS中提出的，用于构建单页面应用的模块。其本质是从a标签点击跳转功能延展而来的。
+       说明:
+       (1)router功能的实现需要依赖于angularJS的扩展库文件angular-route.min.js
+       (2)router功能的实现需要依赖于ng-view指令【ng-view指令】的作用是提供标注【显示不同页面的容器】的作用
+       (3)router功能的实现需要依赖于a标签的href属性href='#要加载的页面代号’
+       此属性设置目的，是在a标签点击的时候能够通知路由,要加载哪一个页面
+       (4)router路由的具体语法是通过app页面数据模型创建的通过config方法来构建一个路由在路由中，
+       通过.when()来判定加载哪一个页面在路由中,通过.otherwise()来决定路由默认加载哪一个页面
+       路由语法结构：
+           app模型.config(['$routerProvider',function($routeProvider){
+               $routerProvider
+               .when('/页面代码',{
+                   templateUrl:'要加载的页面的Url地址（以路由所在的位置为起点）',
+                   controller:'对应页面的控制器名字'
+               })
+               ...
+               .otherwise({
+                   redirectTo:'/默认加载页面的代码'
+               })
+           }])
+        注意:
+        (1)如果需要使用路由功能，那么在创建页面数据模型app的时候，
+          必须要注入一条名为【ngRoute】的信息，此注入信息相当于对当前页面声明:我要使用路由功能
+          语法:var app = angular.module('app', ['ngRoute']);
+        (2)在承载不同页面的容器上记得不要忘记加ng-view，否则路由选中的页面无法加载。
+        */
+      //路由文件
+      var app = angular.module("app", ["ngRoute"]);
+      app.config([
+        "$routeProvider",function ($routeProvider) {
+          $routeProvider
+            .when("/showname", {
+              templateUrl: "showname.html",
+              controller: "showNameController"
+            })
+            .when("showinfo", {
+              templateUrl: "showinfo.html",   
+              controller: "showInfoController"
+            })
+            .otherwise({
+              redirectTo: "/showname",
+            });
+        },
+      ]);
+      //控制器文件
+      app.controller("mainController", ["$scope",function ($scope) {
+          $scope.mainTitle = "angular路由学习";
+        },
+      ]);
+      app.controller("showNameController", ["$scope",function ($scope) {
+          $scope.pnames = ["jeck", "lida", "mairi"];
+        },
+      ]);
+      app.controller("showInfoController", ["$scope",function ($scope) {
+          $scope.infos = [
+            { username: "jeck", password: "123456" },
+            { username: "lida", password: "456789" },
+            { username: "mairi", password: "666888" },
+          ];
+        },
+      ]);
+    </script>
+  </body>
+</html>

@@ -1,7 +1,5 @@
 //评论控制器
-app.controller("commentController", [
-  "$scope",
-  function ($scope) {
+app.controller("commentController", ["$scope",function ($scope) {
     $scope.commentArr = [];
     $scope.submitComment = function (msg) {
       $scope.commentArr.push(msg);

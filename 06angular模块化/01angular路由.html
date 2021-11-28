@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title ng-bind="mainTitle"></title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#showname">姓名列表显示</a></li>
+      <li><a href="#showinfo">信息列表显示</a></li>
+    </ul>
+    <div style="width: 300px; height: 300px; border: 1px solid black;" ng-view></div>
+    <script src="./angularjs/angular.mini.js"></script>
+    <script src="./router/angular-route.min.js"></script>
+    <script src="./appjs/app.js"></script>
+    <script src="./router/router.js"></script>
+    <script src="./controller/mainController.js"></script>
+    <script src="./controller/showInfoController.js"></script>
+    <script src="./controller/showNameController.js"></script>
+  </body>
+</html>
