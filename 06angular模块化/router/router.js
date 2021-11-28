@@ -3,11 +3,11 @@ app.config([
     "$routeProvider",function ($routeProvider) {
       $routeProvider
         .when("/showname", {
-          templateUrl: "showname.html",
+          templateUrl: "html/showname.html",
           controller: "showNameController"
         })
         .when("showinfo", {
-          templateUrl: "showinfo.html",   
+          templateUrl: "html/showinfo.html",   
           controller: "showInfoController"
         })
         .otherwise({

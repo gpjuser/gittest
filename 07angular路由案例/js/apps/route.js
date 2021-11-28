@@ -1,0 +1,18 @@
+app.config(['$routeProvider',function($routeProvider){
+    $routeProvider
+    .when('/mail-homepage',{
+        templateUrl:'view/homepage.html',
+        controller:'homepageController'
+    })
+    .when('/mail-writed',{
+        templateUrl:'view/writepage',
+        controller:'writepageController'
+    })
+    .when('/mail-drafts',{
+        templateUrl:'view/draftspage',
+        controller:'draftspageController'
+    })
+    .otherwise({
+        redirectTo:'/mail-homepage'
+    })
+}])
