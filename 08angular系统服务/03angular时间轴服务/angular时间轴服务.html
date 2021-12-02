@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{mainControllerTitle}}</title>
+  </head>
+  <body>
+    <p>{{num}}</p>
+    <script src="../../angularjs/angular.mini.js"></script>
+    <script>
+      var app = angular.module("app", []);
+      app.controller("mainController", [
+        "$scope",
+        "$interval",
+        "$timeout",
+        function ($scope, $interval,$timeout) {
+          $scope.mainControllerTitle = "时间轴服务";
+          $scope.num = 0;
+          //间隔调用服务
+          var timer = null;
+          timer = $interval(function () {
+            if ($scope.num >= 100) {
+              /*清除时间轴服务*/
+              $interval.cancel(timer);
+            } else {
+              $scope.num++;
+            }
+          }, 500);
+          //延迟调用服务
+          var timerout=null;
+          timerout=$timeout(function(){
+              alert('加载完毕')
+          },2000)
+        },
+      ]);
+    </script>
+  </body>
+</html>

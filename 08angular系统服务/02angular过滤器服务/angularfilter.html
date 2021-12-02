@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <span>我的手机价格：</span><span>{{12999 | currency:'￥'}}</span>
+    <input type="text" ng-model='filter_input'>
+    <ul>
+        <!--filter:filter_input 表示过滤出符合pnames数组中元素的数据  -->
+        <li ng-repeat='pname in pnames | filter:filter_input'>{{pname}}</li>
+    </ul>
+    <h2>{{'HELLO WORLD!' | lowercase}}</h2>
+    <h2>{{'hello world!' | uppercase}}</h2>
+
+    <ul>
+        <!-- 过滤器表示按照分数排名 -->
+        <li ng-repeat='info in infos | orderBy:"score"'>{{info.name+','+info.score}}</1i>
+    </ul>
+    <!-- 自定义过滤器 -->
+    <p>{{'只要努力就很有可能成功' | surfix}}</p>
+    <script src="../../angularjs/angular.mini.js"></script>
+    <script>
+      var app = angular.module("app", []);
+      app.filter('surfix',function(){
+          return function(text){
+              return text.concat('-------by Frank')
+          }
+      })
+      app.controller("mainController", ["$scope",function ($scope) {
+          $scope.mainControllerTitle = "过滤服务";
+          $scope.filter_input='';
+          $scope.pnames=['a','b','c','d','e','f','g'];
+          $scope.infos=[
+              {name:'lida',score:88},
+              {name:'mairi',score:86},
+              {name:'jeck',score:90},
+              {name:'jimu',score:89}
+            ]
+
+        },
+      ]);
+     /*
+     1.过滤服务$filter
+    描述:$filter服务在NG框架中是对数据进行转换显示的一种小工具使用本服务能够让页面中的显示内容呈现为不一样的结构
+    语法:{{任意内容|过滤器}}
+    补充:$filter虽然是系统服务，但是支持自定义内容说明:
+    在$filter服务中共计提供了四种过滤器
+    (1)**|currency:'货币符号用于将内容转换为货币格式tips:默认转换为美元格式,当然支持定制。
+    (2)**|filter:子集数组:用于从一个数组选项中筛选出符合要求的子集教组--类似于输入提示功能
+    (3)**|uppercase,lowercase用于将内容的格式进行大小写转换
+    (4)**|orderBy:'表达式'用于根据表达式的值对显示的内容进行顺序排列一般会用于ng-repeat结构中,
+    并且repeat结构不是简单数据结构
+     */
+    /*
+    2.自定义过滤服务
+    描述:直接对app页面数据模型，通过.filter()方法进行扩展，
+         即可在页面中直接使用,不需要额外的注入操作。
+    语法:app.filter('自定义过滤服务名称', function(){
+            return function (text){
+             //...功能代码
+            }
+        });
+    */
+
+    </script>
+  </body>
+</html>

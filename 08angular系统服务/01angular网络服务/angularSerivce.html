@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{mainControllerTitle}}</title>
+  </head>
+  <body>
+    <script src="../../angularjs/angular.mini.js"></script>
+    <script>
+      /*
+        1,服务service
+        描述:可以这么来认为，服务service相当于是app提供给用户使用的全局变量 而服务存在的目的,
+        其实可以认为是对各个controller功能的一个扩展说明:
+        (1)在NG框架中，服务是一个名词。实在不能理解就替换成【NG全局变量】
+        (2)在NG框架中，因为controller的作用域问题，平级controller之间无法互相沟通所以提出服务这一概念，
+        不同的controller可以通过注入服务的方式来进行交互(3)在NG样架中，存在多种不同的服务，有系统服务，
+        也允许自定义服务【在amngular框架内存在多种全局变量，有系统自带的，也可以自己重新定义】
+        注意:不管是系统服务还是自定义服务,服务没有优劣之分只是从功能角度去选择更适合的。
+        2.系统服务http
+        描述:NG框架内直接对app数据模型内置了一个用于处理网络功能的服务，就是$http可以认为系统提供的服务都是带有$前缀的
+        而为了区分服务，我们自定义的服务一般都不写$前缀
+        语法:因为$http服务是系统直接提供,所以不需要手动定义服务的内容而是直接通过注入的方式,添加到controller内，
+        直接使用即可。
+        app.controller('控制器名'，['$scope', 'shttp', function ($scope，$http){...}]);
+        注意:对controllen注入了$http服务后，只是说明在这个controller的脚本内可以使用网络请求而不是已经使用了网络请求
+        具体的网络请求还需要我们手动编辑。
+        */
+      var app = angular.module("app", []);
+      app.controller("mainController", [
+        "$scope",
+        "$http",
+        function ($scope, $http) {
+          $scope.mainControllerTitle = "服务概述与系统服务";
+          //   $http({
+          //       method:'GET',
+          //       url:'angular_serivce.php'
+          //   }).success(function(data){
+          //       console.log(data);
+          //   }).error(function(err){
+          //       console.log(err);
+          //   });
+          $http({
+            method: "post",
+            url: "angular_serivce.php",
+            headers: {
+              "Content-Type": "application/x-www-form-unlencoded",
+            },
+            data:'userName="frank"&password="123456"'
+          }).success(function(data){
+              console.log(data);
+          }).error(function(error){
+              console.log(error);
+          })
+        },
+      ]);
+    </script>
+  </body>
+</html>

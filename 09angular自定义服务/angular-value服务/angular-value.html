@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app' ng-controller='mainController'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{mainControllerTitle}}</title>
+</head>
+<body>
+    <div>
+        <span>{{msg}}</span>
+    </div>
+    <div class="diva" ng-controller='controllera' style="width:300px;height:100px;border:1px solid black;">
+        <input type="text" ng-model='info'>
+        <button ng-click='submit(info)'>保存</button>
+     </div>
+     <div class="divb" ng-controller='controllerb' style="width:300px;height:100px;border:1px solid black;">
+        <p ng-bind='showMsg'></p>
+        <button ng-click='download()'>获取</button>
+     </div>
+    <script src="../../angularjs/angular.mini.js"></script>
+    <script>
+        var obj=angular.module('app',[]);
+        //1 自定义服务valueService
+        obj.value('globalValue',{
+            panme:'hello'
+        })
+        //2 注入自定义服务
+        obj.controller('mainController',['$scope','globalValue',function($scope,globalValue){
+            $scope.mainControllerTitle='自定义服务--value服务'
+            $scope.msg=globalValue.panme
+        }])
+        obj.controller('controllera',['$scope','globalValue',function($scope,globalValue){
+            //input内初始值默认为null
+            $scope.info='';
+            $scope.submit=function(temMsg){
+               globalValue.inputValue=temMsg
+            }
+        }])
+        obj.controller('controllerb',['$scope','globalValue',function($scope,globalValue){
+            $scope.showMsg='';
+            $scope.download=function(){
+                $scope.showMsg=globalValue.inputValue
+            }
+        }])
+        /*
+        1.自定义服务
+        描述:
+        之前课程中我们提到过，angularJS中的服务实际上就是对app数据模型的扩展
+        从某种意义上可以理解为【服务就是全局变量】的含义，接下来要提到的自定义服务则很好的贯彻了
+        这个观点系统服务是系统直接提供的,有不同的功能自定义服务需要手动编辑功能
+        但两者都需要注入之后才能使用(特殊的服务不需要注入，$filter $watch)
+        说明:自定义服务的方式常见有五种:
+        (1)value服务
+        (2)constant服务
+        (3)factory服务
+        (4)service服务
+        (5)provider服务
+        补充：不论哪一种自定义服务，自定义服务的目的基本都是一致的，就是提供一个全局变量来支持controller之间的交流
+        2.value自定义服务
+        描述:value服务是通过.value()方法对app数据模型进行扩展的一种服务定制方式
+        通过对app进行扩展可以使得服务在controller之间进行信息交换，充当“全局变量”的角色
+        语法:app.value('国定义服务名称',服务内容JSON);
+        说明:value服务实际上就是一个全局变量，所以可以随意的对其内容进行读取和修改
+        */
+    </script>
+</body>
+</html>
